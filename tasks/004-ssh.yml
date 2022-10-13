@@ -11,6 +11,7 @@
     dest: "/etc/ssh/sshd_config"
     line: "PasswordAuthentication no"
     state: absent
+  register: sshd_config
 
 - name: Restart SSH Service
   service:
