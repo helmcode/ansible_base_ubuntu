@@ -1,0 +1,27 @@
+---
+# Required in host_vars for each host
+hostname_fqdn: "{{ hostname }}"
+
+# List of existing repositories
+list_repositories:
+  docker_exist: False
+  terraform_exist: False
+
+# Update Apt Packages
+update_all_pkg: True
+
+# Basic packages to install
+list_packages_install:
+  - fail2ban
+  - zip
+  - unzip
+  - dnsutils
+  - net-tools
+  - build-essential
+
+# Extra packages to install (optional)
+list_packages_install_extra: []
+
+# Internal DNS
+hosts_list: []
+

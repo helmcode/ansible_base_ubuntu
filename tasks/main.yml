@@ -1,0 +1,20 @@
+---
+# Only for Ubuntu distros
+- fail: msg="The system may not be Ubuntu system. Abort execution."
+  when: ansible_facts['os_family']|lower == 'ubuntu'
+
+- include: 001-repositories.yml
+  tags:
+    - base_repositories
+
+- include: 002-packages.yml
+  tags:
+    - base_packages
+
+- include: 003-system-basics.yml
+  tags:
+    - base_system_basics
+
+- include: 004-ssh.yml
+  tags:
+    - base_ssh

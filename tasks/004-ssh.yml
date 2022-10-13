@@ -1,0 +1,19 @@
+---
+- name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+  openssh_keypair:
+    path: /home/ubuntu/.ssh/id_rsa
+    owner: ubuntu
+    group: ubuntu
+    mode: '0600'
+
+- name: Clean SSH Access
+  lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    line: "PasswordAuthentication no"
+    state: absent
+
+- name: Restart SSH Service
+  service:
+    name: ssh
+    state: restarted
+  when: sshd_config.changed

@@ -1,0 +1,32 @@
+---
+# necessary to upgrade full on next task
+- name: upgrade apt packages
+  apt:
+    upgrade="{{ upgrade_packages_type|default('full') }}"
+    install_recommends=no
+    state=latest
+    force=yes
+    autoremove=yes
+  when: update_all_pkg | bool
+
+# install basic packages
+- name: install basic packages
+  apt:
+    name="{{ list_packages_install|default([]) }}"
+    state=latest
+    install_recommends=no
+
+# install extra packages
+- name: install extra packages
+  apt:
+    name="{{ list_packages_install_extra|default([]) }}"
+    install_recommends=no
+    force=yes
+
+# Install docker-compose if necessary
+- name: Download Docker Compose binary
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'
+  when: list_repositories.docker_exist | bool

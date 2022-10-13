@@ -1,0 +1,31 @@
+---
+- name: Set a hostname
+  hostname:
+    name: "{{ hostname_fqdn }}"
+
+- name: Update the /etc/hosts file with hostname
+  become: yes
+  become_user: root
+  lineinfile:
+    dest: "/etc/hosts"
+    line: "127.0.1.1 {{ hostname_fqdn }}"
+    state: present
+
+- name: Update the /etc/hosts file with all hosts of the platform
+  become: yes
+  become_user: root
+  lineinfile:
+    dest: "/etc/hosts"
+    line: "{{ item }}"
+    state: present
+  loop: "{{ hosts_list }}"
+  when: hosts_list is defined
+
+
+# Users permissions
+- name: adding ubuntu to group docker
+  user:
+    name: ubuntu
+    groups: docker
+    append: yes
+  when: list_repositories.docker_exist | bool
