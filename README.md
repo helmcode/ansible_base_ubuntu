@@ -49,6 +49,5 @@ hosts_list:
   - "10.1.1.1 example"
 ```
 
-### Generación de llave RSA:
-
-El role por defecto genera una llave RSA para el usuario ubuntu.
+### Denegar acceso SSH con usuario y contraseña:
+Se realiza por defecto en la task 004-ssh.yml

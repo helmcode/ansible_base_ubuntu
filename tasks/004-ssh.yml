@@ -1,11 +1,4 @@
 ---
-- name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
-  openssh_keypair:
-    path: /home/ubuntu/.ssh/id_rsa
-    owner: ubuntu
-    group: ubuntu
-    mode: '0600'
-
 - name: Clean SSH Access
   lineinfile:
     dest: "/etc/ssh/sshd_config"
