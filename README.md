@@ -2,7 +2,7 @@
 
 Este role funciona únicamente para sistemas **Ubuntu** y es el encargado de:
 
-- Configurar los repositorios de Docker y Terraform.
+- Configurar los repositorios de Docker, Terraform y Ansible.
 - Instalar y actualizar todos los paquetes base y todos los paquetes extra necesarios dependiento de cada host.
 - Es el encargado de configurar el hostname de cada servidor y actualizar el fichero de /etc/hosts.
 - Es el encargado de generar una llave ssh para el usuario **ubuntu**
@@ -15,6 +15,7 @@ Este role por defecto no configura ningún repositorio adicional a los del siste
 list_repositories:
   docker_exist: True
   terraform_exist: True
+  ansible_exist: True
 ```
 
 Por defecto, estos valores están en _False_

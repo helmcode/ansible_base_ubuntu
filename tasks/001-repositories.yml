@@ -16,6 +16,7 @@
     state: present
   when: list_repositories.docker_exist | bool
 
+
 # Config Terraform Repository
 - name: Config Terraform Repository
   debug: msg="terraform_exist == {{ list_repositories.terraform_exist }}"
@@ -32,6 +33,18 @@
     repo: deb https://apt.releases.hashicorp.com focal main
     state: present
   when: list_repositories.terraform_exist | bool
+
+
+# Config Ansible Repository
+- name: Config Ansible Repository
+  debug: msg="ansible_exist == {{ list_repositories.ansible_exist }}"
+  when: list_repositories.ansible_exist | bool
+
+- name: Add Ansible Repository
+  apt_repository:
+    repo: ppa:ansible/ansible
+  when: list_repositories.ansible_exist | bool
+
 
 # Update cache
 - name: update apt cache
