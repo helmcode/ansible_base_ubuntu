@@ -17,22 +17,22 @@
   when: list_repositories.docker_exist | bool
 
 
-# Config Terraform Repository
-- name: Config Terraform Repository
-  debug: msg="terraform_exist == {{ list_repositories.terraform_exist }}"
-  when: list_repositories.terraform_exist | bool
+# Config Hashicorp Repository
+- name: Config Hashicorp Repository
+  debug: msg="hashicorp_exist == {{ list_repositories.hashicorp_exist }}"
+  when: list_repositories.hashicorp_exist | bool
 
-- name: Add Terraform GPG apt Key
+- name: Add Hashicorp GPG apt Key
   apt_key:
     url: https://apt.releases.hashicorp.com/gpg
     state: present
-  when: list_repositories.terraform_exist | bool
+  when: list_repositories.hashicorp_exist | bool
 
-- name: Add Terraform Repository
+- name: Add Hashicorp Repository
   apt_repository:
     repo: deb https://apt.releases.hashicorp.com focal main
     state: present
-  when: list_repositories.terraform_exist | bool
+  when: list_repositories.hashicorp_exist | bool
 
 
 # Config Ansible Repository

@@ -5,7 +5,7 @@ hostname_fqdn: "{{ hostname }}"
 # List of existing repositories
 list_repositories:
   docker_exist: False
-  terraform_exist: False
+  hashicorp_exist: False
   ansible_exist: False
 
 # Update Apt Packages
