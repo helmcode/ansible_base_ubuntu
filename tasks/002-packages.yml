@@ -23,6 +23,12 @@
     install_recommends=no
     force=yes
 
+# install extra packages whit Snap
+- name: install extra packages
+  snap:
+    name="{{ list_snap_packages_install_extra|default([]) }}"
+    classic=yes
+
 # Install docker-compose if necessary
 - name: Download Docker Compose binary
   get_url:
