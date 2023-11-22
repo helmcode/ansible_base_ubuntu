@@ -16,6 +16,7 @@ list_repositories:
   docker_exist: True
   hashicorp_exist: True
   ansible_exist: True
+  jenkins_exist: True
 ```
 
 Por defecto, estos valores están en _False_
