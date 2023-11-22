@@ -27,10 +27,17 @@ Este role instala paquetes básicos que podréis encontrar en defaults/main.yml
 Además permite instalar paquetes extra que son necesarios dependiendo del host. Para indicarle qué paquetes extra instalar debemos configurar la siguiente lista en host_vars o en group_vars. Ejemplo:
 
 ```YAML
+# APT packages
 list_packages_install_extra:
   - docker-ce
   - docker-ce-cli
   - containerd.io
+
+# Snap packages:
+list_snap_packages_install_extra: []
+
+# Pip packages
+list_pip_packages_install_extra: []
 ```
 
 ### Indicar el hostname:

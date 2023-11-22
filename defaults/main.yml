@@ -26,6 +26,9 @@ list_packages_install_extra: []
 # Extra packages to install with Snap (optional)
 list_snap_packages_install_extra: []
 
+# Extra packages to install with Pip (optional)
+list_pip_packages_install_extra: []
+
 # Internal DNS
 hosts_list: []
 
