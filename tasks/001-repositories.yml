@@ -5,14 +5,14 @@
   when: list_repositories.docker_exist | bool
 
 - name: Add Docker GPG apt Key
-  apt_key:
-    url: https://download.docker.com/linux/debian/gpg
-    state: present
+  get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.gpg
   when: list_repositories.docker_exist | bool
 
 - name: Add Docker Repository
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
   when: list_repositories.docker_exist | bool
 
@@ -23,14 +23,14 @@
   when: list_repositories.hashicorp_exist | bool
 
 - name: Add Hashicorp GPG apt Key
-  apt_key:
+  get_url:
     url: https://apt.releases.hashicorp.com/gpg
-    state: present
+    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
   when: list_repositories.hashicorp_exist | bool
 
 - name: Add Hashicorp Repository
   apt_repository:
-    repo: deb https://apt.releases.hashicorp.com focal main
+    repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     state: present
   when: list_repositories.hashicorp_exist | bool
 
@@ -43,7 +43,26 @@
 - name: Add Ansible Repository
   apt_repository:
     repo: ppa:ansible/ansible
+    state: present
   when: list_repositories.ansible_exist | bool
+
+
+# Config Jenkins Repository
+- name: Config Jenkins Repository
+  debug: msg="jenkins_exist == {{ list_repositories.jenkins_exist }}"
+  when: list_repositories.jenkins_exist | bool
+
+- name: Add Jenkins GPG apt Key
+  get_url:
+    url: https://pkg.jenkins.io/debian/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+  when: list_repositories.jenkins_exist | bool
+
+- name: Add Jenkins Repository
+  apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/"
+    state: present
+  when: list_repositories.jenkins_exist | bool
 
 
 # Update cache
