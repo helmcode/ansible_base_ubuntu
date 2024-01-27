@@ -28,11 +28,13 @@
   snap:
     name="{{ list_snap_packages_install_extra|default([]) }}"
     classic=yes
+  when: list_snap_packages_install_extra | default([]) | length > 0
 
 # install extra packages whit Pip
 - name: install extra Pip packages
   pip:
     name="{{ list_pip_packages_install_extra|default([]) }}"
+  when: list_pip_packages_install_extra | default([]) | length > 0
 
 # Install docker-compose if necessary
 - name: Download Docker Compose binary
